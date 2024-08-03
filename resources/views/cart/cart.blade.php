@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
             <main class="my-8">
-              <div class="container px-6 mx-auto bg-white">
+              <div class="container px-6 mx-auto ">
                   <div class="flex justify-center my-6">
                       <div class="flex flex-col w-full p-8 text-gray-100 bg-black shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
                         @if ($message = Session::get('success'))

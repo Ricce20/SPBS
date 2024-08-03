@@ -18,10 +18,11 @@ class OrderController extends Controller
 
         public function index()
         {   
-
+            //dd(Session::get('user'));
             if(Session::get('api_key')){
 
                 $response = Http::withToken(Session::get('api_key'))->get('http://127.0.0.1:8002/api/orders/'.Session::get('user')->id);
+                //dd($response);
                 if($response->successful()){
                     $ordersJson = json_decode($response->body());
                     $orders = $ordersJson->orders;
@@ -29,7 +30,7 @@ class OrderController extends Controller
                     return view('orders.orders_user', compact('orders'));
     
                 }else{
-                    session()->flas('error','Error en la peticion');
+                    session()->flash('error','Error en la peticion');
                     return redirect()->back();
                 }
               
@@ -119,7 +120,7 @@ class OrderController extends Controller
 
 
             }else{
-                session()->flas('error','Error en la peticion');
+                session()->flash('error','Error en la peticion');
                 return redirect()->back();
             }
           
