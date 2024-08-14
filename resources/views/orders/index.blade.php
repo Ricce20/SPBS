@@ -35,7 +35,7 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Hora del pedido</th>
-            <th scope="col">Total</th>
+            {{-- <th scope="col">Total</th> --}}
             <th scope="col">Dirección</th>
             <th scope="col">Estado</th>
             <th></th>
@@ -48,7 +48,7 @@
         <tr>
             <td>{{$order->id}}</td>
             <td>{{$order->time}}</td>
-            <td>${{$order->price}}</td>
+            {{-- <td>${{$order->price}}</td> --}}
             <td>{{$order->address}}</td>
             <td>{{$order->status}}</td>
 

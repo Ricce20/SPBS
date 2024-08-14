@@ -98,7 +98,7 @@
 
      <div class="col-md-3">
       <label for="validationCustom09" class="form-label">Imagen 1</label>
-      <img src="/storage/{{$product->image_1}}" alt="{{$product->image_1}}" width="100px">
+      <img src="{{$product->image_1}}" alt="{{$product->image_1}}" width="100px">
       <input style="color: white" type="file"  class="form-control" id="validationCustom09" name="image1" accept="image/*" >
       <div class="invalid-feedback">
         Looks good!
@@ -106,7 +106,7 @@
     </div>
     <div class="col-md-3">
       <label for="validationCustom10" class="form-label">Imagen 2</label>
-      <td><img src="/storage/{{$product->image_2}}" alt="{{$product->image_2}}" width="100px"></td>
+      <td><img src="{{$product->image_2}}" alt="{{$product->image_2}}" width="100px"></td>
       <input style="color: white" type="file" class="form-control" id="validationCustom10" name="image2" accept="image/*" >
       <div class="invalid-feedback">
         Looks good!
@@ -114,7 +114,7 @@
     </div>
     <div class="col-md-3">
       <label for="validationCustom11" class="form-label">Imagen 3</label>
-      <td><img src="/storage/{{$product->image_3}}" alt="{{$product->image_3}}" width="100px"></td>
+      <td><img src="{{$product->image_3}}" alt="{{$product->image_3}}" width="100px"></td>
       <input style="color: white" type="file" class="form-control" id="validationCustom11" name="image3" accept="image/*" >
       <div class="invalid-feedback">
         Looks good!

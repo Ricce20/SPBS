@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>SPBS - Catálogo</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
 
   <!-- Favicons -->
   <link href="assets/assets/img/spbs.png" rel="icon">
@@ -27,13 +27,6 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/assets/css/style.css" rel="stylesheet">
-  <!-- =======================================================
-  * Template Name: Restaurantly
-  * Updated: Sep 20 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -41,160 +34,198 @@
   <main id="main">
 
     <!-- ======= Portfolio Section ======= -->
-<section id="portfolio" class="portfolio">
-  <div class="container" data-aos="fade-up">
+    <section id="portfolio" class="portfolio">
+      <div class="searching">
+        <p>Buscar:</p>
+        <input type="text" class=" form-control inputSearch" id="searchInput" placeholder="Buscar por nombre" name="" id="">
+      </div>
+      <div class="container" data-aos="fade-up">
 
-    <div class="section-title">
-      <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-        <a href="/inicio" class="book-a-table-btn scrollto d-none d-lg-flex">Volver a la página de inicio</a>
-      </div><br><br>
-      <h2>Catálogo</h2>
-      <p>Catálogo</p>
-    </div>
+        <div class="section-title">
+          <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+            <a href="/inicio" class="book-a-table-btn scrollto d-none d-lg-flex">Volver a la página de inicio</a>
+          </div><br><br>
+          <h2>Catálogo</h2>
+          <p>Catálogo</p>
+        </div>
 
-    <!-- Filtros con checkboxes -->
-    <div id="filterOptions" class="d-flex justify-content-center">
-      {{-- <label class="container"><input type="checkbox" checked="checked" > Pestañas</label>
-      <label class="container"><input type="checkbox" checked="checked" name="filter" value="Pinzas"> Pinzas</label>
-      <label class="container"><input type="checkbox" checked="checked" name="filter" value="Shampoo"> Shampoo</label>
-      <label class="container"><input type="checkbox" checked="checked" name="filter" value="Pegamento"> Pegamento</label> --}}
-<style>
-  /* The container */
-.container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: magenta;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-</style>
-      <label class="container">Pestañas
-        <input type="checkbox" checked="checked" name="filter" value="Pestañas">
-        <span class="checkmark"></span>
-        <label class="container">Pinzas
-          <input type="checkbox" checked="checked" name="filter" value="Pinzas">
-          <span class="checkmark"></span>
+        <!-- Filtros con checkboxes -->
+        <div id="filterOptions" class="d-flex justify-content-center">
+          <label class="container">Pestañas
+            <input type="checkbox" checked="checked" name="filter" value="Pestañas">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Pinzas
+            <input type="checkbox" checked="checked" name="filter" value="Pinzas">
+            <span class="checkmark"></span>
+          </label>
           <label class="container">Shampoo
             <input type="checkbox" checked="checked" name="filter" value="Shampoo">
             <span class="checkmark"></span>
-            <label class="container">Pegamento
-              <input type="checkbox" checked="checked" name="filter" value="Pegamento">
-              <span class="checkmark"></span>
-    </div>
+          </label>
+          <label class="container">Pegamento
+            <input type="checkbox" checked="checked" name="filter" value="Pegamento">
+            <span class="checkmark"></span>
+          </label>
+        </div>
 
-    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-      @foreach ($products as $product)
-        <div class="col-lg-4 col-md-6 portfolio-item {{$product->type}}">
-          {{-- @dd($product->image_1) --}}
-          <img class="card-img-top" src="{{$product->image_1}}" alt="{{$product->image_1}}" />
-          <div class="portfolio-info">
-            <h4>{{$product->name}}</h4>
-            <p>$ {{$product->price}}</p><br>
+        
+        <!-- Estilos personalizados -->
+        <style>
+          .searching {
+            background-color: rgb(61, 62, 63);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto; /* Centrará la barra en la página */
+          }
+
+          .searching p {
+            color: rgb(226, 226, 226);
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 10px;
+          }
+
+          .inputSearch {
+            flex-grow: 1;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s; 
+            position: relative;
+          }
+
+          .inputSearch:focus {
+            border-color: #007bff;
+          }
+
+          .inputSearch::placeholder {
+            color: #999;
+          }
+
+          .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            user-select: none;
+          }
+
+          .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+          }
+
+          .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+          }
+
+          .container:hover input ~ .checkmark {
+            background-color: #ccc;
+          }
+
+          .container input:checked ~ .checkmark {
+            background-color: magenta;
+          }
+
+          .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+          }
+
+          .container input:checked ~ .checkmark:after {
+            display: block;
+          }
+
+          .container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+          }
+        </style>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+          @foreach ($products as $product)
+          <div class="col-lg-4 col-md-6 portfolio-item {{$product->type}}">
+            <img class="card-img-top" src="{{$product->image_1}}" alt="{{$product->image_1}}" />
+            <div class="portfolio-info">
+              <h4>{{$product->name}}</h4>
+              <p>$ {{$product->price}}</p><br>
               <a class="book-a-table-btn" href="/cat/detail/{{$product->id}}" title="More Details">Ver más</a><br><br>
               <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" value="{{ $product->id }}" name="id">
                 <input type="hidden" value="{{ $product->name }}" name="name">
                 <input type="hidden" value="{{ $product->price }}" name="price">
-                <input type="hidden" value="{{ $product->image_1 }}"  name="image_1">
+                <input type="hidden" value="{{ $product->image_1 }}" name="image_1">
                 <input type="hidden" value="1" name="quantity">
                 <button class="book-a-table-btn" style="color: magenta">Comprar</button>
-            </form>
+              </form>
+            </div>
           </div>
+          @endforeach
         </div>
-      @endforeach
-    </div>
 
-  </div>
-</section><!-- End Portfolio Section -->
+      </div>
+    </section><!-- End Portfolio Section -->
 
-<script>
-  // Función para filtrar los productos según los checkboxes seleccionados
-  function filterProducts() {
-    const checkboxes = document.querySelectorAll('input[name="filter"]');
-    const selectedTypes = Array.from(checkboxes)
-      .filter(checkbox => checkbox.checked)
-      .map(checkbox => checkbox.value);
-
-    // Oculta todos los elementos
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    portfolioItems.forEach(item => {
-      item.style.display = 'none';
-    });
-
-    // Muestra solo los elementos seleccionados
-    selectedTypes.forEach(type => {
-      const selectedItems = document.querySelectorAll(`.portfolio-item.${type}`);
-      selectedItems.forEach(item => {
-        item.style.display = 'block';
+    <script>
+      function filterProducts() {
+        const checkboxes = document.querySelectorAll('input[name="filter"]');
+        const selectedTypes = Array.from(checkboxes)
+          .filter(checkbox => checkbox.checked)
+          .map(checkbox => checkbox.value);
+          
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    
+        // Oculta todos los elementos
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        portfolioItems.forEach(item => {
+          item.style.display = 'none';
+        });
+    
+        // Muestra solo los elementos seleccionados que coinciden con el nombre buscado
+        selectedTypes.forEach(type => {
+          const selectedItems = document.querySelectorAll(`.portfolio-item.${type}`);
+          selectedItems.forEach(item => {
+            const productName = item.querySelector('h4').textContent.toLowerCase();
+            if (productName.includes(searchInput)) {
+              item.style.display = 'block';
+            }
+          });
+        });
+      }
+    
+      // Asocia la función al cambio en los checkboxes y en el campo de búsqueda
+      document.querySelectorAll('input[name="filter"]').forEach(checkbox => {
+        checkbox.addEventListener('change', filterProducts);
       });
-    });
-  }
-
-  // Asocia la función al cambio en los checkboxes
-  document.querySelectorAll('input[name="filter"]').forEach(checkbox => {
-    checkbox.addEventListener('change', filterProducts);
-  });
-</script>
+    
+      document.getElementById('searchInput').addEventListener('input', filterProducts);
+    </script>
+    
 
   </main><!-- End #main -->
 
@@ -234,45 +265,20 @@
             </ul>
           </div>
 
-          {{-- <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form> --}}
-
-          </div>
-
         </div>
       </div>
     </div>
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>spbs</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>SPBS</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">Sofia & Paulette</a>
+        Designed by <a href="#">SebasDesigns</a>
       </div>
     </div>
   </footer><!-- End Footer -->
 
-  <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->

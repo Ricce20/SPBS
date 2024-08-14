@@ -36,7 +36,7 @@
         <td>{{$user->last_name}}</td>
         <td>{{$user->phone}}</td>
         <td>{{$user->address}}</td>
-        <td><img src="/storage/{{$user->image}}" alt="{{$user->image}}" width="100px"></td>
+        <td><img src="{{$user->image}}" alt="{{$user->image}}" width="100px"></td>
         <td>{{$user->type}}</td>
         <td>{{$user->status}}</td>
         <td>{{$user->email}}</td>

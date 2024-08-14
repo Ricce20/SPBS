@@ -87,7 +87,7 @@
 
      <div class="col-md-3">
       <label for="validationCustom09" class="form-label">Imagen 1</label>
-      <img src="/storage/{{$product->image_1}}" alt="{{$product->image_1}}" width="100px">
+      <img src="{{$product->image_1}}" alt="{{$product->image_1}}" width="100px">
       <div class="invalid-feedback">
         Looks good!
       </div>
@@ -95,14 +95,14 @@
     <div class="col-md-3">
       
       <label for="validationCustom10" class="form-label">Imagen 2</label>
-      <td><img src="/storage/{{$product->image_2}}" alt="{{$product->image_2}}" width="100px"></td>
+      <td><img src="{{$product->image_2}}" alt="{{$product->image_2}}" width="100px"></td>
       <div class="invalid-feedback">
         Looks good!
       </div>
     </div>
     <div class="col-md-3">
       <label for="validationCustom11" class="form-label">Imagen 3</label>
-      <td><img src="/storage/{{$product->image_3}}" alt="{{$product->image_3}}" width="100px"></td>
+      <td><img src="{{$product->image_3}}" alt="{{$product->image_3}}" width="100px"></td>
       <div class="invalid-feedback">
         Looks good!
       </div>

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 
 class RegisteredUserController extends Controller
 {
@@ -22,6 +24,10 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
+    public function createClient(): View
+    {
+        return view('auth.register-client');
+    }
 
     /**
      * Handle an incoming registration request.
@@ -30,7 +36,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // dd($request);
+        //dd($request);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -49,34 +55,75 @@ class RegisteredUserController extends Controller
         //     'password' => Hash::make($request->password),
         // ]);
 
-        $user=new User();
-        $user->name=$request->name;
-        $user->last_name=$request->last_name;
-        $user->phone=$request->phone;
-        $user->address=$request->address; 
-        // $user->image=$request->image;
+        // $user=new User();
+        // $user->name=$request->name;
+        // $user->last_name=$request->last_name;
+        // $user->phone=$request->phone;
+        // $user->address=$request->address; 
+        // // $user->image=$request->image;
         
-        $user->image='default.png'; 
+        // $user->image='default.png'; 
 
-        $user->type=$request->type;
-        $user->status='ACTIVO';
-        $user->email=$request->email;
-        $user->password=Hash::make($request->password);
-        $user->save();
+        // $user->type=$request->type;
+        // $user->status='ACTIVO';
+        // $user->email=$request->email;
+        // $user->password=Hash::make($request->password);
+        // $user->save();
 
-        if ($request->hasFile('image')) {
+        // if ($request->hasFile('image')) {
 
-            $extension = $request->image->extension();
-            $new_name = 'user_' . $user->id . '_1.' . $extension;
-            $path = $request->image->storeAs('/images/users', $new_name, 'public');
-            $user->image= $path;
-            $user->save();
+        //     $extension = $request->image->extension();
+        //     $new_name = 'user_' . $user->id . '_1.' . $extension;
+        //     $path = $request->image->storeAs('/images/users', $new_name, 'public');
+        //     $user->image= $path;
+        //     $user->save();
+        // }
+
+        $response = Http::attach(
+            'image', file_get_contents($request->image), $request->image->getClientOriginalName()
+        )->post('http://127.0.0.1:8002/api/register', [
+            'name'=>$request->name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'type' => $request->type,
+            'status' => $request->status,
+            'email' => $request->email,
+            'password' => $request->password,
+            'password_confirmation' => $request->password_confirmation
+        ]);
+      // dd($response);
+
+        if ($response->successful()) {
+            $body = json_decode($response->body());
+           //dd($body);
+           if(Session::get('api_key')){
+            return redirect('/users');
+           }
+            \Session::put('api_key', $body->token);
+            \Session::put('user', $body->user);
+            //dd(Session::get('user'));
+
+            if(Session::get('user')->type=='CLIENTE'){
+                return redirect(RouteServiceProvider::HOME);;
+            }
+            if(Session::get('user')->type=='ADMIN'){
+                return redirect(RouteServiceProvider::ADMIN);
+
+            }else{
+                return redirect()->route('login');
+            }
+           
+        } else {
+            session()->flash('error','Credenciales invalidas');
+            return redirect()->intended(RouteServiceProvider::HOME);
+          
         }
 
-        event(new Registered($user));
+      //  event(new Registered($user));
 
-        Auth::login($user);
+      //  Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+       // return redirect(RouteServiceProvider::HOME);
     }
 }

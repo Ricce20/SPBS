@@ -20,7 +20,19 @@
             <td>{{$order->time}}</td>
             {{-- <td>${{$order->price}}</td> --}}
             <td>{{$order->address}}</td>
-            <td>{{$order->status}}</td>
+            {{-- <td class="border-lime-500">{{$order->status}}</td> --}}
+            @if ($order->status == 'Completo')
+            <td class="border-lime-500">{{$order->status}}</td>
+            @endif
+            @if ($order->status == 'Pagado')
+            <td class="border-cyan-500">{{$order->status}}</td>
+            @endif
+            @if ($order->status == 'Cancelado')
+            <td class="border-red-500">{{$order->status}}</td>
+            @endif
+            @if ($order->status == 'Pendiente')
+            <td class="border-orange-500">{{$order->status}}</td>
+            @endif
 
 
             <td><a href="{{route ('orders.show',['id' =>$order->id])}}"><button

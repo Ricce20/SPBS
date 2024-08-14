@@ -21,9 +21,9 @@ class ClientController extends Controller
         $client->phone=$request->phone;
         $client->address=$request->address; 
         $client->image=$request->image; 
-        $client->status=$request->status;
-    
+        $client->status= 'ACTIVO';
         $client->save();
+        
         return view('/clients/index')->with('clients', Client::where('status', 'Activo')->get());
     }
 

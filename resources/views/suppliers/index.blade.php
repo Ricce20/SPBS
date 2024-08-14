@@ -33,7 +33,7 @@
         <td>{{$supplier->phone}}</td>
         {{-- <td>{{$supplier->rfc}}</td> --}}
         <td>{{$supplier->address}}</td>
-        <td><img src="/storage/{{$supplier->image}}" alt="{{$supplier->image}}" width="100px"></td>
+        <td><img src="{{$supplier->image}}" alt="{{$supplier->image}}" width="100px"></td>
         
         <td>{{$supplier->status}}</td>
 

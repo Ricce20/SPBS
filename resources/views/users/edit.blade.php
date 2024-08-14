@@ -3,7 +3,7 @@
 @section('contenido')
 
 
-<form class="row g-3 needs-validation" novalidate action="/users/update/{{$user->id}}" method="POST">
+<form class="row g-3 needs-validation" novalidate action="/users/update/{{$user->id}}" method="POST" enctype="multipart/form-data">
   @csrf
   @method('PUT')
 
