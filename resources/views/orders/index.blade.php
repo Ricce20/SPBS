@@ -67,6 +67,25 @@
                     </form>
                 </div>
             </td>
+            <td>
+                @if ($order->status != 'Enviado')
+                <form action="{{ route('enviarOrden', $order->id) }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="shipping_company">Empresa de Envío</label>
+                        <input type="text" name="shipping_company" id="shipping_company" class="form-control" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="tracking_number">Número de Guía</label>
+                        <input type="text" name="tracking_number" id="tracking_number" class="form-control" required>
+                    </div>
+            
+                    <button type="submit" class="btn btn-primary">Enviar Correo</button>
+                </form>
+                @endif
+                
+            </td>
             <td><a href="{{route ('orders.show',['id' =>$order->id])}}"><button
                         class="px-6 py-2 text-sm  rounded shadow text-red-100 bg-purple-500">Detalle</button></a></td>
         </tr>

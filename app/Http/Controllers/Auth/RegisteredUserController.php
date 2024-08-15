@@ -55,20 +55,20 @@ class RegisteredUserController extends Controller
         //     'password' => Hash::make($request->password),
         // ]);
 
-        // $user=new User();
-        // $user->name=$request->name;
-        // $user->last_name=$request->last_name;
-        // $user->phone=$request->phone;
-        // $user->address=$request->address; 
-        // // $user->image=$request->image;
+        $user=new User();
+        $user->name=$request->name;
+        $user->last_name=$request->last_name;
+        $user->phone=$request->phone;
+        $user->address=$request->address; 
+        // $user->image=$request->image;
         
-        // $user->image='default.png'; 
+        $user->image='default.png'; 
 
-        // $user->type=$request->type;
-        // $user->status='ACTIVO';
-        // $user->email=$request->email;
-        // $user->password=Hash::make($request->password);
-        // $user->save();
+        $user->type=$request->type;
+        $user->status='ACTIVO';
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->save();
 
         // if ($request->hasFile('image')) {
 
@@ -79,51 +79,57 @@ class RegisteredUserController extends Controller
         //     $user->save();
         // }
 
-        $response = Http::attach(
-            'image', file_get_contents($request->image), $request->image->getClientOriginalName()
-        )->post('http://127.0.0.1:8002/api/register', [
-            'name'=>$request->name,
-            'last_name' => $request->last_name,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'type' => $request->type,
-            'status' => $request->status,
-            'email' => $request->email,
-            'password' => $request->password,
-            'password_confirmation' => $request->password_confirmation
-        ]);
+        // $response = Http::attach(
+        //     'image', file_get_contents($request->image), $request->image->getClientOriginalName()
+        // )->post('http://127.0.0.1:8002/api/register', [
+        //     'name'=>$request->name,
+        //     'last_name' => $request->last_name,
+        //     'phone' => $request->phone,
+        //     'address' => $request->address,
+        //     'type' => $request->type,
+        //     'status' => $request->status,
+        //     'email' => $request->email,
+        //     'password' => $request->password,
+        //     'password_confirmation' => $request->password_confirmation
+        // ]);
       // dd($response);
 
-        if ($response->successful()) {
-            $body = json_decode($response->body());
-           //dd($body);
-           if(Session::get('api_key')){
-            return redirect('/users');
-           }
-            \Session::put('api_key', $body->token);
-            \Session::put('user', $body->user);
-            //dd(Session::get('user'));
+        // if ($response->successful()) {
+        //     $body = json_decode($response->body());
+        //    //dd($body);
+        //    if(Session::get('api_key')){
+        //     return redirect('/users');
+        //    }
+        //     \Session::put('api_key', $body->token);
+        //     \Session::put('user', $body->user);
+        //     //dd(Session::get('user'));
 
-            if(Session::get('user')->type=='CLIENTE'){
-                return redirect(RouteServiceProvider::HOME);;
-            }
-            if(Session::get('user')->type=='ADMIN'){
-                return redirect(RouteServiceProvider::ADMIN);
+        //     if(Session::get('user')->type=='CLIENTE'){
+        //         return redirect(RouteServiceProvider::HOME);;
+        //     }
+        //     if(Session::get('user')->type=='ADMIN'){
+        //         return redirect(RouteServiceProvider::ADMIN);
 
-            }else{
-                return redirect()->route('login');
-            }
+        //     }else{
+        //         return redirect()->route('login');
+        //     }
            
-        } else {
-            session()->flash('error','Credenciales invalidas');
-            return redirect()->intended(RouteServiceProvider::HOME);
+        // } else {
+        //     session()->flash('error','Credenciales invalidas');
+        //     return redirect()->intended(RouteServiceProvider::HOME);
           
-        }
+        // }
 
-      //  event(new Registered($user));
+       event(new Registered($user));
 
-      //  Auth::login($user);
+      Auth::login($user);
+       $token = $user->createToken('apiToken')->plainTextToken;
 
-       // return redirect(RouteServiceProvider::HOME);
+        \Session::put('api_key', $token);
+        \Session::put('user', $user);
+        //dd(Session::get('user'));
+        return redirect(RouteServiceProvider::HOME);
+
+       
     }
 }

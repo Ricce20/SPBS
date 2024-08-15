@@ -77,7 +77,7 @@ class PaymentController extends Controller
                    // 'time' => now(),
                     'phone' => Session::get('user')->phone,
                     'address' => Session::get('user')->address,
-                    'user_id' =>Session::get('user')->id
+                    'user_id' =>Session::get('user')->id,
                 ]);
 
                 //dd($responseOrder);

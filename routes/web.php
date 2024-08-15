@@ -17,6 +17,8 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,23 @@ Route::get('/', function () {
     
 });
 
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
  
+//     return redirect('/');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+ 
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
 Route::get('/auth/redirect', function () {
     return Socialite::driver('google')->redirect();
 });
@@ -71,7 +89,7 @@ Route::get('/google-auth/callback', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -153,7 +171,8 @@ Route::get('/admin',function(){
         //PEDIDOS
         Route::get('/orders',[OrderController::class,'index'])->name('orders.index');//clientes
          
-        
+        Route::post('/enviarOrden/{id}', [OrderController::class, 'enviarOrden'])->name('enviarOrden');
+
         Route::get('/admin/orders',[OrderController::class,'admin'])->name('admin.orders');//admin
 
          Route::get('/orders/show/{id}',[OrderController::class,'prod'])->name('orders.show');

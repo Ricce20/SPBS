@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Order;
+use App\Models\DetailOrder;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
-
+use App\Mail\ShippingDetailsMail;
+use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 {
 
@@ -173,6 +175,27 @@ public function updateOrder(Request $request)
         // return view('/orders.index', compact('orders', 'message'));
     }
 
+    public function enviarOrden(Request $request,$id){
+       // dd($request,$id);
+        if(Session::get('api_key')){
 
+            $response = Http::withToken(Session::get('api_key'))->post('http://127.0.0.1:8002/api/enviarOrden/'.$id,[
+                'shippingCompany' => $request->input('shipping_company'),
+                'trackingNumber' => $request->input('tracking_number'),
+                '_method' => 'PUT'
+        
+            ]);
+           // dd($response);
+            if($response->successful()){
+                return redirect()->back();
+            }else{
+                session()->flash('error','Error en la peticion');
+                return redirect()->back();
+            }
+          
+        }else{
+            return redirect('/');
+        }
+    }
 }
 
